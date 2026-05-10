@@ -4,6 +4,11 @@ version = "0.2.0"
 edition = "2021"
 description = "CLI for bootstrapping Tether in Rojo/Wally projects"
 license = "MIT"
+repository = "https://github.com/datagrout/tether"
+homepage = "https://github.com/datagrout/tether"
+readme = "../README.md"
+keywords = ["roblox", "luau", "datagrout", "game", "cli", "wally", "rojo"]
+categories = ["command-line-utilities", "game-development"]
 
 [[bin]]
 name = "tether"
