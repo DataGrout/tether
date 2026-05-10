@@ -7,7 +7,7 @@ license = "MIT"
 repository = "https://github.com/datagrout/tether"
 homepage = "https://github.com/datagrout/tether"
 readme = "../README.md"
-keywords = ["roblox", "luau", "datagrout", "game", "cli", "wally", "rojo"]
+keywords = ["roblox", "luau", "datagrout", "wally", "rojo"]
 categories = ["command-line-utilities", "game-development"]
 
 [[bin]]
