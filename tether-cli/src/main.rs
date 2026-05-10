@@ -1,5 +1,5 @@
 use clap::{Parser, Subcommand};
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use std::path::PathBuf;
 
 const ONRAMP_URL: &str = "https://gateway.datagrout.ai/onramp";
