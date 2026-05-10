@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: lune-org/setup-lune@v1
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install lune
+        run: cargo install lune --locked
       - name: Run TetherUtils tests
         run: lune run tether-lua/lune_tests.luau
