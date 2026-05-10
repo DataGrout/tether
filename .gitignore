@@ -1,0 +1,12 @@
+*.swp
+*.swo
+*~
+
+.DS_Store
+Thumbs.db
+
+# Rust build artifacts
+tether-cli/target/
+
+# Lua credentials
+TetherConfig.lua
