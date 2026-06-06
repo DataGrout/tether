@@ -1,5 +1,5 @@
 --[[
-  Tether v0.2 -- DataGrout connector for Roblox (Luau)
+  Tether v0.2.1 -- DataGrout connector for Roblox (Luau)
 
   Drop this ModuleScript into ReplicatedStorage and require it from a Script.
   First connect() auto-bootstraps a free-tier DG account -- no API key needed.
@@ -319,7 +319,7 @@ function Client:invoke(prompt, opts, callback)
         system = opts.system,
       })
     end)
-    if callback then callback(ok and result or nil, ok and nil or result) end
+    if callback then if ok then callback(result, nil) else callback(nil, result) end end
   end)
 end
 
@@ -333,7 +333,7 @@ function Client:orchestrate(agentId, input, callback)
         input    = input,
       })
     end)
-    if callback then callback(ok and result or nil, ok and nil or result) end
+    if callback then if ok then callback(result, nil) else callback(nil, result) end end
   end)
 end
 
@@ -356,7 +356,7 @@ function Client:generate_rules(description, namespace, callback)
       })
       return rulesText
     end)
-    if callback then callback(ok and result or nil, ok and nil or result) end
+    if callback then if ok then callback(result, nil) else callback(nil, result) end end
   end)
 end
 
@@ -370,7 +370,7 @@ function Client:call(toolName, args, callback)
     local ok, result = pcall(function()
       return self:_rpc(toolName, args)
     end)
-    if callback then callback(ok and result or nil, ok and nil or result) end
+    if callback then if ok then callback(result, nil) else callback(nil, result) end end
   end)
 end
 
@@ -403,7 +403,7 @@ function Client:batteries()
         local ok, result = pcall(function()
           return client:_rpc("data-grout@1/batteries.search@1", {})
         end)
-        if callback then callback(ok and result or nil, ok and nil or result) end
+        if callback then if ok then callback(result, nil) else callback(nil, result) end end
       end)
     end,
 
@@ -417,7 +417,7 @@ function Client:batteries()
             namespace = namespace,
           })
         end)
-        if callback then callback(ok and result or nil, ok and nil or result) end
+        if callback then if ok then callback(result, nil) else callback(nil, result) end end
       end)
     end,
   }
@@ -430,7 +430,7 @@ function Client:game_rules(namespace, callback)
     local ok, result = pcall(function()
       return self:_rpc("data-grout@1/batteries.installed@1", { namespace = namespace })
     end)
-    if callback then callback(ok and result or nil, ok and nil or result) end
+    if callback then if ok then callback(result, nil) else callback(nil, result) end end
   end)
 end
 

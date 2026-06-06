@@ -171,6 +171,31 @@ return function()
       expect(calls[1].args.values[1]).to.equal(1)
     end)
 
+    it("passes (result, nil) on success", function()
+      local client = mockClient({ ["data-grout@1/math.trend@1"] = { trend = "up" } })
+      local received, err
+      client:call("data-grout@1/math.trend@1", { values = { 1, 2, 3 } }, function(r, e)
+        received, err = r, e
+      end)
+      task.wait()
+      expect(received).to.be.ok()
+      expect(received.trend).to.equal("up")
+      -- regression: the error slot must be nil on success (not the result)
+      expect(err).to.never.be.ok()
+    end)
+
+    it("passes (nil, err) on failure", function()
+      local client = mockClient()
+      client._rpc = function() error("boom") end
+      local received, err
+      client:call("data-grout@1/math.trend@1", {}, function(r, e)
+        received, err = r, e
+      end)
+      task.wait()
+      expect(received).to.never.be.ok()
+      expect(err).to.be.ok()
+    end)
+
     it("blocks inference tools when inference_degraded", function()
       local client, calls = mockClient()
       client._status = "inference_degraded"

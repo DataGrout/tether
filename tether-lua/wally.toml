@@ -1,6 +1,6 @@
 [package]
 name = "datagrout/tether"
-version = "0.2.0"
+version = "0.2.1"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 description = "DataGrout connector for Roblox — logic cells, LLM inference, and 118+ tools in one ModuleScript"

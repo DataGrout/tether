@@ -2,6 +2,11 @@
 
 All notable changes to Tether are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2.1] - 2026-06-06
+
+### Fixed
+- **Callback error argument on success**: `dg:call`, `dg:invoke`, `dg:orchestrate`, `dg:generate_rules`, `dg:batteries().list`/`install`, and `dg:game_rules` built their callback as `callback(ok and result or nil, ok and nil or result)`. The error slot `ok and nil or result` meant  on success `ok and nil` is `nil`, so it falls through to `result` -- meaning the **error argument was set to the result on every successful call**. Consumers that check `if err` treated all successful calls as failures. These now pass `(result, nil)` on success and `(nil, err)` on failure, matching `dg:query`. Added regression tests in `spec/Tether.spec.lua`.
+
 ## [0.2.0] - 2026-05-09
 
 ### Added
