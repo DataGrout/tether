@@ -7,7 +7,7 @@ Lightweight DataGrout connectors for game engines.
 Connect your game to DG's full intelligence layer in minutes. Free tier auto-provisions on first connect -- no API key, no dashboard, no configuration.
 
 ```lua
-local Tether = require(game.ReplicatedStorage.Tether)
+local Tether = require(game.ServerStorage.Tether)
 local dg = Tether.connect()
 
 -- Query game logic facts (free)
@@ -52,7 +52,9 @@ rojo serve           # TetherConfig syncs alongside Tether into Studio
 `TetherConfig.lua` is gitignored automatically. Teammates run `tether init` once on their machine.
 
 ### Manual (any setup)
-Drop `tether-lua/Tether.lua` into ReplicatedStorage. First `connect()` call bootstraps a free-tier account automatically.
+Drop `tether-lua/Tether.lua` into **ServerStorage**. First `connect()` call bootstraps a free-tier account automatically.
+
+> **Security:** keep Tether and `TetherConfig.lua` in ServerStorage (or ServerScriptService), never ReplicatedStorage — everything in ReplicatedStorage replicates to every player's client, credentials included. Tether is server-only anyway: Roblox only allows HTTP from the server.
 
 ---
 

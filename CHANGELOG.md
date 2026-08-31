@@ -2,6 +2,12 @@
 
 All notable changes to Tether are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2.2] - 2026-08-31
+
+### Security
+- **ServerStorage, not ReplicatedStorage**: every install instruction (README quickstart and manual setup, the `Tether.lua` header and usage example, `TetherConfig.template.lua`) told users to place Tether and `TetherConfig.lua` in ReplicatedStorage -- which replicates to every player's client, credentials included. All guidance now says ServerStorage, with explicit warnings. Tether is server-only regardless: Roblox only permits HTTP from the server.
+- `Tether.lua` now warns at require time if loaded on the client, explaining the placement rule.
+
 ## [0.2.1] - 2026-06-06
 
 ### Fixed

@@ -1,17 +1,24 @@
 --[[
-  Tether v0.2.1 -- DataGrout connector for Roblox (Luau)
+  Tether v0.2.2 -- DataGrout connector for Roblox (Luau)
 
-  Drop this ModuleScript into ReplicatedStorage and require it from a Script.
+  Drop this ModuleScript into ServerStorage and require it from a server
+  Script. (Not ReplicatedStorage: that replicates to every client, and your
+  TetherConfig sibling holds credentials. HTTP is server-only regardless.)
   First connect() auto-bootstraps a free-tier DG account -- no API key needed.
 
   Usage:
-    local Tether = require(game.ReplicatedStorage.Tether)
+    local Tether = require(game.ServerStorage.Tether)
     local dg = Tether.connect()
     dg:query("my-game", "fish(X, rare, _)", function(results) print(results) end)
 --]]
 
 local HttpService = game:GetService("HttpService")
 local RunService  = game:GetService("RunService")
+
+if RunService:IsClient() then
+  warn("[Tether] required on the CLIENT. Tether is server-only (Roblox blocks client HTTP), "
+    .. "and TetherConfig holds credentials -- keep both in ServerStorage, never ReplicatedStorage.")
+end
 local DataStoreService = game:GetService("DataStoreService")
 local TetherUtils = require(script.Parent:FindFirstChild("TetherUtils"))
 
@@ -57,7 +64,7 @@ end
 
 local function loadFromConfigModule()
   -- Rojo projects generate a TetherConfig.lua via `tether-cli init`.
-  -- It lives alongside Tether.lua in ReplicatedStorage and is gitignored.
+  -- It lives alongside Tether.lua in ServerStorage and is gitignored.
   local ok, cfg = pcall(function()
     return require(script.Parent:FindFirstChild("TetherConfig"))
   end)

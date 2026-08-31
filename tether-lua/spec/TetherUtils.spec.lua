@@ -1,7 +1,7 @@
 -- TetherUtils.spec -- TestEZ unit tests for pure Tether helpers.
 --
 -- Run inside Roblox Studio via the TestEZ plugin, or with Lemur for CI.
--- Place TetherUtils alongside Tether in ReplicatedStorage.
+-- Place TetherUtils alongside Tether in ServerStorage.
 
 local TetherUtils = require(script.Parent.Parent.TetherUtils)
 
